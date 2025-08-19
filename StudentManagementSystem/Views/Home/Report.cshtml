@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Report Details Page";
+}
+
+<div class="text-center">
+    <h2>Students Report by Grade</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Grade</th>
+                <th>Total Students</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Grade</td>
+                    <td>@item.Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>

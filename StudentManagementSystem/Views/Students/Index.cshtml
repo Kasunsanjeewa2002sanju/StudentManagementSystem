@@ -1,0 +1,58 @@
+@model IEnumerable<StudentManagementSystem.Models.Student>
+@{
+	ViewData["Title"] = "Students";
+}
+
+<h2>Students</h2>
+
+<p>
+	<a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<form asp-action="Index" method="get" class="mb-3">
+	<div class="input-group">
+		<input type="text" name="searchString" value="@Context.Request.Query["searchString"]" class="form-control" placeholder="Search by Name or Email" />
+		<button type="submit" class="btn btn-outline-secondary">Search</button>
+	</div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Student Id</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Grade</th>
+				<th>Email</th>
+				<th>Enrollment Date</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.StudentId</td>
+					<td>@item.Name</td>
+					<td>@item.Age</td>
+					<td>@item.Grade</td>
+					<td>@item.Email</td>
+					<td>@item.EnrollmentDate.ToString("yyyy-MM-dd")</td>
+					<td>
+						<a asp-action="Details" asp-route-id="@item.StudentId" class="btn btn-sm btn-info">Details</a>
+						<a asp-action="Edit" asp-route-id="@item.StudentId" class="btn btn-sm btn-warning">Edit</a>
+						<a asp-action="Delete" asp-route-id="@item.StudentId" class="btn btn-sm btn-danger">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<p>No students found.</p>
+}
+
+
